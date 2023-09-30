@@ -1,0 +1,60 @@
+name: API Trigger
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apigee-window-artifacts:
+    name: FL Apigee Artifacts Export
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Check out Git repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: "${{ secrets.TOKEN_KEY }}"
+      
+      - name: Send Variable from Script File to YAML File
+        shell: pwsh
+        run: |
+          Invoke-Pester ./api.ps1 -Passthru
+      
+      - name: Debug Git Config
+        run: |
+          git config --list
+
+      - name: Add local files to Git local branch
+        run: |
+          git config --global user.email "swarnalathagandikota000@gmail.com"
+          git config --global user.name "swa18141"
+          git add .
+
+      - name: Check for delta changes - Git
+        id: check_git_changes
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Local branch is not up to date with remote_branch. Pushing latest code to Git"
+          else
+            echo "Local branch is up to date with Remote branch."
+            exit 0
+          fi
+
+      - name: Commit files to Git
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git commit -a -m "Apigee Artifacts Export Updates"
+            exit 0
+          fi
+
+      - name: Debug Git Status
+        run: |
+          git status
+
+      - name: Push changes to Git
+        run: |
+          git push origin stage
