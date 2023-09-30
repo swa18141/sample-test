@@ -1,5 +1,5 @@
 # Specify the path to the existing file in your repository
-$filePath = "summary.txt"
+$filePath = "sample-test/summary.txt"
 
 # Sample data to add to the file
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
