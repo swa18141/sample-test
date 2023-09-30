@@ -11,7 +11,7 @@ $apps = "your_apps_value"
 
 # API Request - Replace with your actual API request code
 # This is a placeholder example, you should replace it with your actual API request
-$response = Invoke-RestMethod -Uri "https://api.example.com/your-api-endpoint"
+$response = Invoke-RestMethod -Uri " https://httpbin.org/get"
 
 # Create the sample data (including the API response)
 $sampleData = @"
