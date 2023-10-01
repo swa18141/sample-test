@@ -11,7 +11,7 @@ $apps = "your_apps_value"
 
 # API Request - Replace with your actual API request code
 # This is a placeholder example, you should replace it with your actual API request
-$response = Invoke-RestMethod -Uri "https://httpbin.org/get"  # Replace with your API URL
+$response = Invoke-RestMethod -Uri "https://jsonplaceholder.typicode.com/todos/1"  # Replace with your API URL
 
 # Create the sample data (including the API response)
 $sampleData = @"
