@@ -11,19 +11,20 @@ $apps = "your_apps_value"
 
 # API Request - Replace with your actual API request code
 # This is a placeholder example, you should replace it with your actual API request
-$response = Invoke-RestMethod -Uri " https://httpbin.org/get"
+$response = Invoke-RestMethod -Uri "https://httpbin.org/get"  # Replace with your API URL
 
 # Create the sample data (including the API response)
 $sampleData = @"
 created at-- $timestamp
-$org
-$PROXIES
-$sharedflowdatastatus
-$ORGKVMS
-$apps
+Org: $org
+PROXIES: $PROXIES
+Shared Flow Data Status: $sharedflowdatastatus
+ORGKVMS: $ORGKVMS
+Apps: $apps
 API Response:
 $response
 "@
 
 # Write the sample data (including the API response) directly to the 'summary.txt' file
 $sampleData | Set-Content -Path $filePath -Encoding UTF8
+
