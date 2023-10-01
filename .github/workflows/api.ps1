@@ -1,30 +1,24 @@
+# Check if summary.txt file exists, if not, create it
+$filePath = "summary.txt"
+if (-not (Test-Path -Path $filePath)) {
+    New-Item -Path $filePath -ItemType File | Out-Null
+}
+
+
 # Specify the path to the existing file in your repository
 $filePath = "summary.txt"
 
+
 # Sample data to add to the file
-$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$org = "your_org_value"
-$PROXIES = "your_proxies_value"
-$sharedflowdatastatus = "your_sharedflow_value"
-$ORGKVMS = "your_orgkvm_value"
-$apps = "your_apps_value"
+$sampleData = "sample text to store in the summary file to upload into the artifacts...!n`", $response
 
-# API Request - Replace with your actual API request code
-# This is a placeholder example, you should replace it with your actual API request
-$response = Invoke-RestMethod -Uri "https://jsonplaceholder.typicode.com/todos/1"  # Replace with your API URL
+Write-Host $sampleData
 
-# Create the sample data (including the API response)
-$sampleData = @"
-created at-- $timestamp
-Org: $org
-PROXIES: $PROXIES
-Shared Flow Data Status: $sharedflowdatastatus
-ORGKVMS: $ORGKVMS
-Apps: $apps
-API Response:
-$response
-"@
+# Read the existing content of the file
+$fileContent = Get-Content -Path $filePath -Raw
 
-# Write the sample data (including the API response) directly to the 'summary.txt' file
-$sampleData | Set-Content -Path $filePath -Encoding UTF8
+# Append the sample data to the file content
+$newContent = $fileContent + "`n" + $sampleData
 
+# Write the updated content back to the file
+$newContent | Set-Content -Path $filePath
