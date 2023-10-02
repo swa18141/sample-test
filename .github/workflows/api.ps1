@@ -17,7 +17,7 @@ Write-Host $sampleData
 $fileContent = Get-Content -Path $filePath -Raw
 
 # Append the sample data to the file content
-$newContent = $fileContent + "`n" + $sampleData
+$newContent = $fileContent + "`n" + $sampleText
 
 # Write the updated content back to the file
 $newContent | Set-Content -Path $filePath
