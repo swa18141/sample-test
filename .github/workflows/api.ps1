@@ -4,12 +4,8 @@ if (-not (Test-Path -Path $filePath)) {
     New-Item -Path $filePath -ItemType File | Out-Null
 }
 
-# Specify the path to the existing file in your repository
-$filePath = "summary.txt"
-
 # Sample data to add to the file
 $sampleText = "sample text to store in the summary file to upload into the artifacts...!"
-
 
 Write-Host $sampleText
 
@@ -21,3 +17,4 @@ $newContent = $fileContent + "`n" + $sampleText
 
 # Write the updated content back to the file
 $newContent | Set-Content -Path $filePath
+
