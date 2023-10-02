@@ -22,7 +22,7 @@ jobs:
       - name: Send Variable from Script File to YAML File
         shell: pwsh
         run: |
-          Invoke-Pester ./github/workflows/api.ps1 -Passthru
+          Invoke-Pester ./api.ps1 -Passthru
       
       - name: Debug Git Config
         run: |
