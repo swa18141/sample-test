@@ -1,11 +1,12 @@
+          
 name: API Trigger
 
-on:
+on: 
   workflow_dispatch:
 
 jobs:
   apigee-window-artifacts:
-    name: FL Apigee Artifacts Export
+    name: API Trigger
     runs-on: ubuntu-latest
 
     permissions:
@@ -13,16 +14,23 @@ jobs:
       id-token: 'write'
 
     steps:
-      - name: Check out Git repository code
+      - name: Set Git identity
+        run: |
+          git config --global user.email "swarnalathagandikota000@gmail.com"
+          git config --global user.name "swa18141"
+
+      - name: Check out repository code
         uses: actions/checkout@v3
         with:
+          persist-credentials: false
           fetch-depth: 0
-          token: "${{ secrets.KEY_TOKEN }}"
+          token: "${{ secrets.KEY_TOKEN }}"          
       
-      - name: Send Variable from Script File to YAML File
+      - name: API Trigger
         shell: pwsh
         run: |
           Invoke-Pester ./api.ps1 -Passthru
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -64,5 +72,3 @@ jobs:
       - name: Push changes to Git
         run: |
           git push origin build
-          
-     
