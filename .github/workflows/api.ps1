@@ -11,7 +11,7 @@ $filePath = "summary.txt"
 $sampleText = "sample text to store in the summary file to upload into the artifacts...!"
 
 
-Write-Host $sampleData
+Write-Host $sampleText
 
 # Read the existing content of the file
 $fileContent = Get-Content -Path $filePath -Raw
