@@ -9,7 +9,7 @@ $filePath = "summary.txt"
 
 # Sample data to add to the file
 $sampleText = "sample text to store in the summary file to upload into the artifacts...!"
-$sampleData = "$sampleText`n$response"
+
 
 Write-Host $sampleData
 
