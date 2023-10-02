@@ -19,11 +19,11 @@ jobs:
           fetch-depth: 0
           token: "${{ secrets.KEY_TOKEN }}"
       
-      - name: Send Variable from Script File to YAML File
+      - name: Run PowerShell script
         shell: pwsh
         run: |
-          Invoke-Pester ./api.ps1 -Passthru
-      
+          ./api.ps1
+          
       - name: Debug Git Config
         run: |
           git config --list
