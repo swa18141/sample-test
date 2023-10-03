@@ -13,11 +13,6 @@ jobs:
       id-token: 'write'
 
     steps:
-      - name: Set Git identity
-        run: |
-          git config --global user.email "swarnalathagandikota000@gmail.com"
-          git config --global user.name "swa18141"
-
       - name: Check out repository code
         uses: actions/checkout@v3
         with:
