@@ -27,6 +27,12 @@ jobs:
         run: |
           Invoke-Pester -Path ./.github/workflows/api.ps1 
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: summary
+          path: summary.txt
+
       - name: Debug Git Config
         run: |
           git config --list
