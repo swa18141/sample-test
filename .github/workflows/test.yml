@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
           token: "${{ secrets.KEY_TOKEN }}"
 
-      - name: Set execute permission for scripts.ps1
+      - name: Set execute permission for api.ps1
         run: chmod +x api.ps1
 
       - name: Run PowerShell script
