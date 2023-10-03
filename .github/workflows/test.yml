@@ -25,8 +25,7 @@ jobs:
       - name: Run PowerShell script
         shell: pwsh
         run: |
-          Invoke-Pester ./api.ps1 -Passthru
-
+          Invoke-Pester -Path ./.github/workflows/api.ps1
       - name: Debug Git Config
         run: |
           git config --list
