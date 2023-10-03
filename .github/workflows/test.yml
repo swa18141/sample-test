@@ -1,11 +1,14 @@
-name: API Trigger
+name: Apigee Artifacts Export
 
-on: 
+on:
   workflow_dispatch:
+
+env:
+  current_timestamp: $(($(date +%s%N) / 1000000))
 
 jobs:
   apigee-window-artifacts:
-    name: API Trigger
+    name: FL Apigee Artifacts Export
     runs-on: ubuntu-latest
 
     permissions:
@@ -13,34 +16,29 @@ jobs:
       id-token: 'write'
 
     steps:
-      - name: Check out repository code
+      - name: Check out Git repository code
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
           fetch-depth: 0
-          token: "${{ secrets.KEY_TOKEN }}"          
-      
-      - name: API Trigger
+          token: "${{ secrets.KEY_TOKEN }}"
+
+      - name: Set execute permission for scripts.ps1
+        run: chmod +x api.ps1
+
+      - name: Run PowerShell script
         shell: pwsh
         run: |
           Invoke-Pester ./api.ps1 -Passthru
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: summary
-          path: summary.txt
-
-      
       - name: Debug Git Config
         run: |
           git config --list
 
       - name: Add local files to Git local branch
         run: |
-          git config --global user.email "swarnalathagandikota000@gmail.com"
-          git config --global user.name "swa18141"
-          git add .
+            git config --global user.email "swarnalathagandikota000@gmail.com"
+            git config --global user.name "swa18141"
+            git add .
 
       - name: Check for delta changes - Git
         id: check_git_changes
@@ -66,3 +64,5 @@ jobs:
       - name: Push changes to Git
         run: |
           git push origin build
+
+      
